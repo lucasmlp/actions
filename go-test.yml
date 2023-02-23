@@ -26,10 +26,6 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
-      - name: ⚙️ Setup staticcheck
-        id: setup-staticcheck
-        run: go install honnef.co/go/tools/cmd/staticcheck@latest
-
       - name: 🔎 Verify dependencies
         id: go-verify
         run: go mod verify

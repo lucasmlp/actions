@@ -71,9 +71,10 @@ jobs:
             type=sha
             type=ref,event=branch
             type=raw,value={{branch}}-${{ env.COMMIT_UNIX_TIME }}
+
       - name: 🐳 Docker Build and Push
         id: docker-build-push
-        uses: docker/build-push-action@master
+        uses: docker/build-push-action@v4
         with:
           push: true
           context: .

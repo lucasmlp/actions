@@ -71,7 +71,7 @@ jobs:
         with:
           images: ${{ secrets.ecr-registry }}/${{ inputs.ecr-repository }}
           tags: >
-            type= ${{ inputs.tag }}
+            type= raw,value=${{ inputs.tag }}
 
       - name: 🐳 Docker Build and Push
         id: docker-build-push

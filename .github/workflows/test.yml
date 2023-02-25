@@ -6,11 +6,15 @@ on:
       go-version:
         required: true
         type: string
+      timeout-minutes:
+        required: true
+        type: number
 
 jobs:
   test:
-    name: Test
+    name: Test Go v.${{ inputs.go-version }}
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: 🛒 Checkout
         id: checkout

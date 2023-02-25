@@ -23,7 +23,7 @@ on:
 
 jobs:
   docker-build:
-    name: 🐳 Docker Build
+    name: 🐳 Docker Build and Push to ECR
     runs-on: ubuntu-latest
     timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:

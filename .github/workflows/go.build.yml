@@ -2,14 +2,32 @@ name: Build
 
 on:
   workflow_call:
+    inputs:
+      timeout-minutes:
+        required: true
+        type: number
+      AWS_REGION:
+        required: true
+        type: string
+      ECR_REPOSITORY:
+        required: true
+        type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+        type: string
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+        type: string
+      ECR_REGISTRY:
+        required: true
+        type: string
+
 
 jobs:
   docker-build:
     name: 🐳 Docker Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs:
-      test
     steps:
       - name: 🛒 Checkout
         uses: actions/checkout@v2
@@ -33,7 +51,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ inputs.AWS_REGION }}
 
       - name: Login to Amazon ECR Private
         id: login-ecr
@@ -51,7 +69,7 @@ jobs:
         id: docker-metadata
         uses: docker/metadata-action@v4
         with:
-          images: ${{ secrets.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}
+          images: ${{ secrets.ECR_REGISTRY }}/${{ inputs.ECR_REPOSITORY }}
           tags: |
             type=sha
             type=ref,event=branch

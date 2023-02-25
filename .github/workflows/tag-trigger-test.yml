@@ -1,8 +1,9 @@
 name: Tag Trigger Test
 
 on:
-  tags:
-    - "*"
+  push:
+    tags:
+      - "*"
 
 jobs:
   test:

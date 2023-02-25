@@ -3,7 +3,8 @@ name: Release Version
 on:
   workflow_call:
     outputs:
-      release-version: ${{ jobs.release-version.outputs.release-version }}
+      release-version: 
+        value: ${{ jobs.release-version.outputs.release-version }}
 
 jobs:
   release-version:

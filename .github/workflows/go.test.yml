@@ -12,7 +12,7 @@ on:
 
 jobs:
   test:
-    name: Test Go v${{ inputs.go-version }}
+    name: 🧪 Test Go v${{ inputs.go-version }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛒 Checkout

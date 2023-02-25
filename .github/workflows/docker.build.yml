@@ -23,7 +23,7 @@ on:
 
 jobs:
   docker-build:
-    name: 🐳 Docker Build and Push to ECR
+    name: 🐳 Docker Build
     runs-on: ubuntu-latest
     steps:
       - name: 🛒 Checkout

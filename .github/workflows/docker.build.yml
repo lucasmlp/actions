@@ -3,6 +3,9 @@ name: Build
 on:
   workflow_call:
     inputs:
+      tag:
+        required: true
+        type: string
       timeout-minutes:
         required: true
         type: number
@@ -67,10 +70,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ secrets.ecr-registry }}/${{ inputs.ecr-repository }}
-          tags: |
-            type=sha
-            type=ref,event=branch
-            type=raw,value={{branch}}-${{ env.COMMIT_UNIX_TIME }}
+          tags: >
+            type= raw,value=${{ inputs.tag }}
 
       - name: 🐳 Docker Build and Push
         id: docker-build-push

@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    name: Test - Go v${{ matrix.go-version }}
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: 🛒 Checkout
@@ -20,7 +20,7 @@ jobs:
 
       - name: ⚙️ Setup Go
         id: setup-go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: ${{ inputs.go-version }}
 

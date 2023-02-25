@@ -6,18 +6,18 @@ on:
       timeout-minutes:
         required: true
         type: number
-      AWS_REGION:
+      aws-region:
         required: true
         type: string
-      ECR_REPOSITORY:
+      ecr-repository:
         required: true
         type: string
     secrets:
-      AWS_ACCESS_KEY_ID:
+      aws-access-key-id:
         required: true
-      AWS_SECRET_ACCESS_KEY:
+      aws-secret-access-key:
         required: true
-      ECR_REGISTRY:
+      ecr-registry:
         required: true
 
 
@@ -25,6 +25,7 @@ jobs:
   docker-build:
     name: 🐳 Docker Build
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: 🛒 Checkout
         uses: actions/checkout@v2
@@ -46,9 +47,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ inputs.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.aws-access-key-id }}
+          aws-secret-access-key: ${{ secrets.aws-secret-access-key }}
+          aws-region: ${{ inputs.aws-region }}
 
       - name: Login to Amazon ECR Private
         id: login-ecr
@@ -66,7 +67,7 @@ jobs:
         id: docker-metadata
         uses: docker/metadata-action@v4
         with:
-          images: ${{ secrets.ECR_REGISTRY }}/${{ inputs.ECR_REPOSITORY }}
+          images: ${{ secrets.ecr-registry }}/${{ inputs.ecr-repository }}
           tags: |
             type=sha
             type=ref,event=branch

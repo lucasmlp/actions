@@ -1,0 +1,13 @@
+name: Release Version
+
+on:
+  workflow_call:
+
+jobs:
+  release-version:
+    name: Release Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Release Version
+        id: set-release-version
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV

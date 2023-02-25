@@ -25,7 +25,6 @@ jobs:
   docker-build:
     name: 🐳 Docker Build and Push to ECR
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: 🛒 Checkout
         uses: actions/checkout@v2

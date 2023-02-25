@@ -14,7 +14,6 @@ jobs:
   test:
     name: Test Go v.${{ inputs.go-version }}
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
       - name: 🛒 Checkout
         id: checkout
